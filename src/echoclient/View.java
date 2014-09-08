@@ -16,7 +16,7 @@ public class View extends javax.swing.JFrame
         initComponents();
         client = new EchoClient();
         try {
-            client.connect("acoolname.cloudapp.net", 80);
+            client.connect("localhost", 8081);
         } catch (IOException ex) {
             System.exit(-1);
         }

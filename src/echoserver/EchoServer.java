@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import shared.ProtocolStrings;
 import utils.Utils;
+import webserver.WebServer;
 
 public class EchoServer {
 
@@ -20,9 +21,17 @@ public class EchoServer {
     private static ServerSocket serverSocket;
     private static final Properties properties = Utils.initProperties("server.properties");
     private static List<ClientHandler> clientHandlers;
-    private static List<String> nickNames;
+    private List<String> nickNames;
+
+    public List<String> getNickNames() {
+        return nickNames;
+    }
 
     public EchoServer() {
+        
+    }
+    
+    private void runServer() {
         nickNames = new ArrayList<>();
         clientHandlers = new ArrayList<>();
         int port = Integer.parseInt(properties.getProperty("port"));
@@ -63,8 +72,10 @@ public class EchoServer {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         EchoServer server = new EchoServer();
+        WebServer web = new WebServer(server);
+        server.runServer();
     }
 
     private void sendNickNameList() {

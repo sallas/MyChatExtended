@@ -8,6 +8,8 @@ import echoclient.EchoClient;
 import echoclient.EchoListener;
 import echoserver.EchoServer;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -29,7 +31,11 @@ public class TestClient {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                EchoServer.main(null);
+                try {
+                    EchoServer.main(null);
+                } catch (IOException ex) {
+                    Logger.getLogger(TestClient.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }).start();
     }
