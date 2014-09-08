@@ -1,1 +1,1 @@
-java -cp Echo.jar echoclient.EchoClient 9090 localhost
+java -cp Echo.jar echoclient.View 80 acoolname.cloudapp.net
